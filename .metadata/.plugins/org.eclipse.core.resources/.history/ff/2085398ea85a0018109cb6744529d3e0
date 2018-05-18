@@ -1,0 +1,30 @@
+package test;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.junit.Before;
+
+import model.Reader;
+
+public class Test {
+
+
+	  @Before
+	  public void setup() {
+		  Reader r = new Reader();
+
+			try {
+				r.readFile("schema.xlsx");
+			} catch (EncryptedDocumentException | InvalidFormatException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	  }
+	
+	
+
+}

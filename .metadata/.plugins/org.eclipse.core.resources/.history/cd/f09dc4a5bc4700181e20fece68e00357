@@ -1,0 +1,34 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+public class Reader {
+
+	public static final String FILE_PATH = "./schema.xlsx";
+	private Workbook wb;
+	private ArrayList<String> dates;
+	private ArrayList<String> shiftTypes;
+	private ArrayList<String> shifts;
+	
+
+	public void readFile(String filePath) throws EncryptedDocumentException, InvalidFormatException, IOException {
+		wb = WorkbookFactory.create(new File(filePath));
+		
+	}
+	
+	private Sheet getSheet() {
+		
+		return wb.getSheetAt(0);
+	}
+	
+	
+	private 
+	
+	
+}

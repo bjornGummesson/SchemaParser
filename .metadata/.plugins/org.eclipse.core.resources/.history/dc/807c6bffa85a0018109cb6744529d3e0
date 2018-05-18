@@ -1,0 +1,36 @@
+package test;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.junit.*;
+
+import model.Reader;
+
+public class Test {
+
+
+
+	  
+	  
+	    @Test
+	    public void multiplicationOfZeroIntegersShouldReturnZero() {
+	    	 Reader r = new Reader();
+
+				try {
+					r.readFile("schema.xlsx");
+				} catch (EncryptedDocumentException | InvalidFormatException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        	        // assert statements
+	        assertEquals(0, , "10 x 0 must be 0");
+	        assertEquals(0, tester.multiply(0, 10), "0 x 10 must be 0");
+	        assertEquals(0, tester.multiply(0, 0), "0 x 0 must be 0");
+	    }
+	
+
+}

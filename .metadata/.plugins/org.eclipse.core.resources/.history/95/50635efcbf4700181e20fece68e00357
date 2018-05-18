@@ -1,0 +1,80 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+public class Reader {
+
+	
+	private ArrayList<String> dates;
+	private ArrayList<String> shiftTypes;
+	private ArrayList<String> shifts;
+	
+	public static final String FILE_PATH = "./schema.xlsx";
+	private Workbook wb;
+	public Reader(String filePath) throws EncryptedDocumentException, InvalidFormatException, IOException {
+		this.wb = WorkbookFactory.create(new File(filePath));
+		this.dates = new ArrayList<>();
+		this.shiftTypes = new ArrayList<>();
+		this.shifts = new ArrayList<>();
+		
+	}
+
+	
+
+	public void readFile(String filePath) throws EncryptedDocumentException, InvalidFormatException, IOException {
+		wb = WorkbookFactory.create(new File(filePath));
+		
+	}
+	
+	private Sheet getSheet() {
+		
+		return wb.getSheetAt(0);
+	}
+	
+	private void fillLists() {
+		Sheet sheet = getSheet();
+		Iterator<Row> rowIterator =sheet.rowIterator();
+		
+		while(rowIterator.hasNext()) {
+			
+			Row row = rowIterator.next();
+			Iterator<Cell> cellIterator = row.cellIterator();
+			Cell cell;
+			for (int i = 0; i < 4; i++) {
+				cell = cellIterator.next();
+				if(i==0) {
+					dates.add(cell.getStringCellValue());
+					}
+				
+				if(i==2) {
+					shiftTypes.add(cell.getStringCellValue());
+									}
+				if (i==3) {
+					shifts.add(cell.getStringCellValue());
+				}
+			}
+			
+			
+		}
+		
+		
+	
+	}
+	
+	public void print() { 
+		fillLists();
+		for (int i = 0; i < dates.size(); i++) {
+			
+			System.out.println("Date: "+dates.get(i)+ "ShiftType: "+shiftTypes.get(i)+" Shift: "+shifts.get(i));
+		}
+	}
+}
